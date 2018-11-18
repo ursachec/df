@@ -1,6 +1,8 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Prompt(greenXPConfig)
+import XMonad.Prompt.Pass
 
 main = xmonad =<< myBarConfig myConfig
 
@@ -18,9 +20,11 @@ myModMask     = mod4Mask -- Win key or Super_L
 myBorderWidth = 8
 myBorderColor = "#666666"
 myFocusedBorderColor = "#008800"
+passPromptConfig = greenXPConfig
 myAdditionalKeys =
   [
-    ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
+    ((myModMask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
+    , ((myModMask , xK_t), passPrompt passPromptConfig)
   ]
 
 -- configure xmobar
